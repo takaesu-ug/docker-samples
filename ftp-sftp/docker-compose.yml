@@ -7,7 +7,7 @@ services:
       - ./id_rsa_with_passphrase_key.pub:/home/testuser/.ssh/keys/id_rsa_with_passphrase_key.pub:ro
       - ./id_rsa_without_passphrase_key.pub:/home/testuser/.ssh/keys/id_rsa_without_passphrase_key.pub:ro
     ports:
-      - "6022:22"
+      - "22:22"
     command: testuser::1001:1001:upload
   ftp:
     image: stilliard/pure-ftpd
