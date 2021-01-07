@@ -1,6 +1,7 @@
 version: "3"
 services:
-  sftp-with-rsa-key:
+  # sftpで鍵の接続(passphraseありとなし)
+  sftp:
     image: atmoz/sftp
     volumes:
       - ./id_rsa_with_passphrase_key.pub:/home/testuser/.ssh/keys/id_rsa_with_passphrase_key.pub:ro
@@ -8,3 +9,15 @@ services:
     ports:
       - "6022:22"
     command: testuser::1001:1001:upload
+  ftp:
+    image: stilliard/pure-ftpd
+    # volumes:
+    #   - ./remote:/home/virtual/ftp/remote
+    environment:
+      FTP_USER_NAME: bob
+      FTP_USER_PASS: bobpassword
+      FTP_USER_HOME: /home/bob
+      FTP_PASSIVE_PORTS: "10000:10009"
+    ports:
+      - "21:21"
+      - "10000-10009:10000-10009"
